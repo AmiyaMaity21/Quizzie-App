@@ -29,7 +29,7 @@ const QuizSuccess = ({ quizType }) => {
             autoClose: 1000,
           });
         })
-        .catch((error) => {
+        .catch(() => {
           toast.error("Couldn't copy the link", {
             position: "top-center",
           });
@@ -48,15 +48,12 @@ const QuizSuccess = ({ quizType }) => {
         <button
           className="formCloseButton"
           onClick={() => navigate("/dashboard")}
+          aria-label="Close"
         >
           <MdClose />
         </button>
         <h1>Congrats your Quiz is Published!</h1>
-        <p>
-          {newQuizId
-            ? link
-            : "Failed to generate the link, Please try again later!"}
-        </p>
+        {link && <p>{link}</p>}
         <button className="shareButton" onClick={handleCopyLink}>
           Share
         </button>
