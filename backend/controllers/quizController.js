@@ -1,6 +1,7 @@
 const Quiz = require("../models/quizModel");
 const User = require("../models/userModel");
-// Create a new story
+
+// Create a new quiz
 const createQuiz = async (req, res, next) => {
   try {
     const { quizType, quizName, slides } = req.body;
@@ -40,7 +41,7 @@ const getQuizDetailsById = async (req, res, next) => {
   }
 };
 
-// Get all user stories
+// Get all user quizzes
 const getAllQuizzes = async (req, res, next) => {
   try {
     const { userId, filterByImpression } = req.query;
@@ -142,6 +143,7 @@ const answerCounts = async (req, res, next) => {
   }
 };
 
+// count selected option
 const selectedOptionCounts = async (req, res, next) => {
   try {
     const { quizId, slideIndex, selectedOption } = req.body;
