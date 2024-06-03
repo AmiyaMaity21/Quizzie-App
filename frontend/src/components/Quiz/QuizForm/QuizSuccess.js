@@ -25,7 +25,7 @@ const QuizSuccess = ({ quizType }) => {
         .writeText(link)
         .then(() => {
           toast.success("Link copied to Clipboard", {
-            position: "top-center",
+            className: "linkedCopy",
             autoClose: 1000,
           });
         })
@@ -52,7 +52,7 @@ const QuizSuccess = ({ quizType }) => {
           <MdClose />
         </button>
         <h1>Congrats your Quiz is Published!</h1>
-        <p>{link}</p>
+        <p>{newQuizId ? link : "Failed to generate the link, Please try again later!"}</p>
         <button className="shareButton" onClick={handleCopyLink}>
           Share
         </button>

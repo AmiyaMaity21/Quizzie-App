@@ -1,3 +1,4 @@
+
 .quizSuccessForm {
     display: flex;
     flex-direction: column;
@@ -13,7 +14,7 @@
     background-color: white;
     color: #474444;
     z-index: 100;
-    padding: 6rem 6rem 4rem;
+    padding: 6rem 3rem 4rem;
     font-weight: 600;
 }
 
@@ -33,11 +34,10 @@
 .quizSuccessForm>h1 {
     font-size: 2.5rem;
     text-align: center;
-    margin: 0 4rem;
+    margin: 0 6rem;
 }
 
 .quizSuccessForm>p {
-    font-size: 1.25rem;
     padding: 1rem;
     background-color: #EDEDED;
     border-radius: 10px;
@@ -55,4 +55,9 @@
     border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
+}
+
+.linkedCopy {
+    top: 150%;
+    right: 100%;
 }
