@@ -19,7 +19,7 @@
     background-color: white;
     color: #474444;
     z-index: 100;
-    padding: 2rem;
+    padding: 1.5rem;
     font-size: 1.5rem;
     font-weight: 600;
 }
@@ -55,7 +55,7 @@
 
 .optionBox {
     background-color: #F0F0F0;
-    padding: 2rem;
+    padding: 1.5rem;
     text-align: center;
     border-radius: 5px;
     color: #000000;
@@ -189,7 +189,7 @@
     }
 
     .optionBox {
-        padding: 1.25rem;
+        padding: 1rem;
     }
 
     .imgOptionBox, .textImgOptionBox {

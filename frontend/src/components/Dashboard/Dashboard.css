@@ -89,7 +89,7 @@
 }
 
 .quiz>div p:last-child>img {
-    transform: translate(4px, 4px);
+    transform: translate(4px, 3px);
 }
 
 .quiz>p {

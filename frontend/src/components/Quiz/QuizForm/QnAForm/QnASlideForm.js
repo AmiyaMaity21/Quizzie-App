@@ -181,12 +181,16 @@ const QnASlideForm = ({
               }
               className={slide.timer === timer ? "selected" : ""}
             >
-              {timer==="OFF"? "OFF" :`${timer} sec`} 
+              {timer === "OFF" ? "OFF" : `${timer} sec`}
             </p>
           ))}
         </div>
       </div>
-      <button className="addButton" onClick={() => handleAddOption(slideIndex)}>
+      <button
+        className="addButton"
+        onClick={() => handleAddOption(slideIndex)}
+        disabled={slide.options.length > 3}
+      >
         Add option
       </button>
     </div>
