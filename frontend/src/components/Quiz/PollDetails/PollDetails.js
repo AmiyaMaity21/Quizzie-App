@@ -34,7 +34,7 @@ const PollDetails = () => {
         <div className="modal">
           {currentSlide && (
             <div className="quizDetailsForm">
-              <p className="pollHead">0{`${currentSlideIndex + 1}/0${
+              <p className="playQuizhead">0{`${currentSlideIndex + 1}/0${
                 quiz?.slides?.length
               }`}</p>
               <h3 className="quizQuestion">{currentSlide.question}</h3>

@@ -32,11 +32,6 @@
     margin-left: 1rem;
 }
 
-.pollHead {
-    margin-bottom: 2rem;
-    margin-left: 1rem;
-}
-
 .playQuizhead>p:last-child {
     color: #D60000;
 }
@@ -192,7 +187,8 @@
         padding: 1rem;
     }
 
-    .imgOptionBox, .textImgOptionBox {
+    .imgOptionBox,
+    .textImgOptionBox {
         height: 80px;
     }
 
@@ -229,7 +225,7 @@
 
     .pollCompletedForm {
         border-radius: 0;
-        padding: 16rem 2rem;
+        padding: 15rem 2rem;
         width: 100%;
         height: 100vh;
         font-size: 2.5rem;
