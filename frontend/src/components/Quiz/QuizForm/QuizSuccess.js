@@ -53,7 +53,7 @@ const QuizSuccess = ({ quizType }) => {
           <MdClose />
         </button>
         <h1>Congrats your Quiz is Published!</h1>
-        {link && <p>{link}</p>}
+        {newQuizId && <p>{link}</p>}
         <button className="shareButton" onClick={handleCopyLink}>
           Share
         </button>
