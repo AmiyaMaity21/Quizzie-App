@@ -11,19 +11,14 @@ import { deleteQuizReset } from "../../slice/quizSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import QuizDelete from "../Quiz/QuizDelete/QuizDelete";
-import Loader from "../Loader/Loader";
 
 const Analytics = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [selectedQuizId, setSelectedQuizId] = useState("");
   const [isDeleted, SetIsDeleted] = useState(false);
-  const { userQuizzes, quizzesLoading, isDeletedQuiz } = useSelector(
-    (state) => state.quiz
-  );
-  const { userId, isAuthenticated } = useSelector(
-    (state) => state.user
-  );
+  const { userQuizzes, isDeletedQuiz } = useSelector((state) => state.quiz);
+  const { userId, isAuthenticated } = useSelector((state) => state.user);
   const convertDate = (isoDateString) => {
     const date = new Date(isoDateString);
     const dayMonth = date.toLocaleDateString("en-GB", {
@@ -86,90 +81,84 @@ const Analytics = () => {
     } else {
       dispatch(getQuizzesByUser(userId));
     }
-  }, [userId, dispatch, navigate, isAuthenticated, isDeletedQuiz]);
+  }, [userId, dispatch, isAuthenticated, isDeletedQuiz]);
 
   return (
     <div className="dashboard">
       <Sidebar />
-      {quizzesLoading ? (
-        <Loader />
-      ) : (
-        <div className="analyticsContainer">
-          <h1>Quiz Analysis</h1>
-          {userQuizzes?.length > 0 ? (
-            <div>
-              <table>
-                <thead>
-                  <tr className="table-row">
-                    <th>S.No</th>
-                    <th>Quiz Name</th>
-                    <th>Created on</th>
-                    <th>Impression</th>
-                    <th></th>
-                    <th></th>
+      <div className="analyticsContainer">
+        <h1>Quiz Analysis</h1>
+        {userQuizzes?.length > 0 ? (
+          <div>
+            <table>
+              <thead>
+                <tr className="table-row">
+                  <th>S.No</th>
+                  <th>Quiz Name</th>
+                  <th>Created on</th>
+                  <th>Impression</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {userQuizzes?.map((quiz, index) => (
+                  <tr
+                    key={index}
+                    className={
+                      index % 2 !== 0 ? "table-row even-row" : "table-row"
+                    }
+                  >
+                    <td>{index + 1}</td>
+                    <td>{quiz.quizName}</td>
+                    <td>{convertDate(quiz.createdAt)}</td>
+                    <td>{formatImpression(quiz.impression)}</td>
+                    <td>
+                      <button
+                        style={{ color: "#854CFF" }}
+                        onClick={() => {
+                          navigate("/quiz-post", {
+                            state: { quizData: quiz },
+                          });
+                        }}
+                      >
+                        <i>
+                          <FaRegEdit />
+                        </i>
+                      </button>
+                      <button
+                        style={{ color: "#D60000", margin: "0 0.75rem" }}
+                        onClick={() => handleDeleteClick(quiz._id)}
+                      >
+                        <i>
+                          <RiDeleteBin6Fill />
+                        </i>
+                      </button>
+                      <button
+                        style={{ color: "#60B84B" }}
+                        onClick={() => handleCopyLink(quiz._id, quiz.quizType)}
+                      >
+                        <i>
+                          <IoShareSocial />
+                        </i>
+                      </button>
+                    </td>
+                    <td>
+                      <Link to={`/question-wise-analysis/${quiz._id}`}>
+                        Question Wise Analysis
+                      </Link>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {userQuizzes?.map((quiz, index) => (
-                    <tr
-                      key={index}
-                      className={
-                        index % 2 !== 0 ? "table-row even-row" : "table-row"
-                      }
-                    >
-                      <td>{index + 1}</td>
-                      <td>{quiz.quizName}</td>
-                      <td>{convertDate(quiz.createdAt)}</td>
-                      <td>{formatImpression(quiz.impression)}</td>
-                      <td>
-                        <button
-                          style={{ color: "#854CFF" }}
-                          onClick={() => {
-                            navigate("/quiz-post", {
-                              state: { quizData: quiz },
-                            });
-                          }}
-                        >
-                          <i>
-                            <FaRegEdit />
-                          </i>
-                        </button>
-                        <button
-                          style={{ color: "#D60000", margin: "0 0.75rem" }}
-                          onClick={() => handleDeleteClick(quiz._id)}
-                        >
-                          <i>
-                            <RiDeleteBin6Fill />
-                          </i>
-                        </button>
-                        <button
-                          style={{ color: "#60B84B" }}
-                          onClick={() =>
-                            handleCopyLink(quiz._id, quiz.quizType)
-                          }
-                        >
-                          <i>
-                            <IoShareSocial />
-                          </i>
-                        </button>
-                      </td>
-                      <td>
-                        <Link to={`/question-wise-analysis/${quiz._id}`}>
-                          Question Wise Analysis
-                        </Link>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <div className="noquizzesContainer">
-              You have not added any quiz yet!
-            </div>
-          )}
-        </div>
-      )}
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="noquizzesContainer">
+            You have not added any quiz yet!
+          </div>
+        )}
+      </div>
       {isDeleted && (
         <QuizDelete quizId={selectedQuizId} handleCancel={handleCancel} />
       )}

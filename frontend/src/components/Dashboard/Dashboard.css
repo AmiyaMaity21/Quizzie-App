@@ -7,12 +7,12 @@
 }
 
 .dashboardContainer {
+    width: 80vw;
+    height: 100vh;
     background-color: #EDEDED;
     font-weight: 600;
     padding: 5rem 5rem 2rem;
-    width: 80%;
-    overflow-y: auto;
-    height: 100vh;
+    overflow-y: auto;  
 }
 
 .dashboardContainer::-webkit-scrollbar {

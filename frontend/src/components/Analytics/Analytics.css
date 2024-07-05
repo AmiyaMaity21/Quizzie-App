@@ -1,9 +1,9 @@
 .analyticsContainer {
     background-color: #EDEDED;
     font-weight: 600;
-    width: 80%;
-    overflow-y: auto;
+    width: 80vw;
     height: 100vh;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;

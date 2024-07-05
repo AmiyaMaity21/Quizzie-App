@@ -5,12 +5,11 @@ import eyeview from "../../assets/icon-park-outline_eyes.png";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getQuizzesByUser } from "../../actions/quizAction";
-import Loader from "../Loader/Loader";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { userQuizzes, quizzesLoading } = useSelector((state) => state.quiz);
+  const { userQuizzes } = useSelector((state) => state.quiz);
   const { userId } = useSelector((state) => state.user);
 
   const totalQuestions =
@@ -35,7 +34,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getQuizzesByUser(userId, true));
-  }, [userId, dispatch, navigate]);
+  }, [userId, dispatch]);
 
   const playQuiz = (quizId, quizType) => {
     if (quizType === "Q&A") {
@@ -48,59 +47,54 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <Sidebar />
-      {quizzesLoading ? (
-        <Loader />
-      ) : (
-        <div className="dashboardContainer">
-          <div className="dashboardSummary">
-            <div className="dashboardSummaryItem" style={{ color: "#FF5D01" }}>
-              <p>
-                <span>{userQuizzes?.length ? userQuizzes?.length : 0}</span>{" "}
-                Quiz
-                <br /> Created
-              </p>
-            </div>
-            <div className="dashboardSummaryItem" style={{ color: "#60B84B" }}>
-              <p>
-                <span>{totalQuestions}</span> questions <br /> Created
-              </p>
-            </div>
-            <div className="dashboardSummaryItem" style={{ color: "#5076FF" }}>
-              <p>
-                <span>{formatImpression(totalImpressions)}</span> Total
-                <br /> Impressions
-              </p>
-            </div>
+      <div className="dashboardContainer">
+        <div className="dashboardSummary">
+          <div className="dashboardSummaryItem" style={{ color: "#FF5D01" }}>
+            <p>
+              <span>{userQuizzes?.length ? userQuizzes?.length : 0}</span> Quiz
+              <br /> Created
+            </p>
           </div>
-          <div className="dashboardQuizs">
-            <h1>Trending Quizs</h1>
-            {userQuizzes?.length > 0 ? (
-              <div className="dashboardQuizsContainer">
-                {userQuizzes.map((quiz, index) => (
-                  <div
-                    className="quiz"
-                    key={index}
-                    onClick={() => playQuiz(quiz._id, quiz.quizType)}
-                  >
-                    <div>
-                      <p>{quiz.quizName}</p>
-                      <p>
-                        {formatImpression(quiz.impression)}
-                        <img src={eyeview} alt="" />
-                      </p>
-                    </div>
-                    <p>Created on : {convertDate(quiz.createdAt)}</p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="noquizzesContainer">
-                You have not added any quiz yet!
-              </div>
-            )}
+          <div className="dashboardSummaryItem" style={{ color: "#60B84B" }}>
+            <p>
+              <span>{totalQuestions}</span> questions <br /> Created
+            </p>
+          </div>
+          <div className="dashboardSummaryItem" style={{ color: "#5076FF" }}>
+            <p>
+              <span>{formatImpression(totalImpressions)}</span> Total
+              <br /> Impressions
+            </p>
           </div>
         </div>
-      )}
+        <div className="dashboardQuizs">
+          <h1>Trending Quizs</h1>
+          {userQuizzes?.length > 0 ? (
+            <div className="dashboardQuizsContainer">
+              {userQuizzes.map((quiz, index) => (
+                <div
+                  className="quiz"
+                  key={index}
+                  onClick={() => playQuiz(quiz._id, quiz.quizType)}
+                >
+                  <div>
+                    <p>{quiz.quizName}</p>
+                    <p>
+                      {formatImpression(quiz.impression)}
+                      <img src={eyeview} alt="" />
+                    </p>
+                  </div>
+                  <p>Created on : {convertDate(quiz.createdAt)}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="noquizzesContainer">
+              You have not added any quiz yet!
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
