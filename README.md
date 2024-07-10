@@ -52,16 +52,16 @@ For Frontend - REACT_APP_BACKEND_URL = REACT_APP_FRONTEND_URL = fill each filed 
 
 ## Client-side usage(PORT: 3000)
 
-cd frontend  # go to frontend folder
+$ cd frontend &nbsp;&nbsp;// go to frontend folder
 
-npm i        # install packages
+$ npm i &nbsp;&nbsp;// npm install packages
 
-npm start    # run it locally
+$ npm start &nbsp;&nbsp;// run it locally
 
 ## Server-side usage(PORT: 8000)
 
-cd backend  # go to backend folder
+$ cd backend &nbsp;&nbsp;// go to backend folder
 
-npm i       # install packages
+$ npm i &nbsp;&nbsp;// npm install packages
 
-npm start   # run it locally
+$ npm start &nbsp;&nbsp;// run it locally
